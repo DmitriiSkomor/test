@@ -63,8 +63,8 @@
                    </#if>
                     <td>${part.count}</td>
 
-                    <td class="add"><a href="delete/${part.id}?page=${page}&requiredFilter=${requiredFilter}">Remove</a></td>
                     <td class="add"><a href="update/${part.id}?page=${page}&requiredFilter=${requiredFilter}">Edit</a></td>
+                    <td class="add"><a href="delete/${part.id}?page=${page}&requiredFilter=${requiredFilter}">Remove</a></td>
                 </tr>
                 </#list>
         <tfoot>

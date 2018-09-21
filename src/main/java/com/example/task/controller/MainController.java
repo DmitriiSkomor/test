@@ -18,10 +18,6 @@ public class MainController {
         return "redirect:/parts";
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
 
     @Autowired
     public PartService partService;
