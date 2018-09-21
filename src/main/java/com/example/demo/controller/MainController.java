@@ -43,11 +43,13 @@ public class MainController {
                 requiredBool = requiredFilter == 1 ? true : false;
 
                 parts = partService.findAll(page, requiredBool);
-                while (parts.size() == 0) parts = partService.findAll(--page, requiredBool);
+                while (parts.size() == 0 && page > 1) {
+                    parts = partService.findAll(--page, requiredBool);
+                }
 
             } else {
                 parts = partService.findAll(page);
-                if (parts.size() == 0) parts = partService.findAll(--page);
+                if (parts.size() == 0 && page > 1) parts = partService.findAll(--page);
             }
 
         }
@@ -55,6 +57,8 @@ public class MainController {
         for (Part part : partService.findAll()){
             if (part.getRequired()==1 && part.getCount() < countComputers) countComputers = part.getCount();
         }
+        if (countComputers == Integer.MAX_VALUE) countComputers = 0;
+
         model.addAttribute("requiredFilter", requiredFilter);
         model.addAttribute("parts", parts);
         model.addAttribute("computers",countComputers);
