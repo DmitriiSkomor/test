@@ -25,7 +25,17 @@ public class PartServiceImpl implements PartService {
     }
     @Override
     public void save(Part part) {
-        partdao.save(part);
+        List<Part> allParts = partdao.findAll();
+        boolean dublicate = false;
+        for (int i = 0; i < allParts.size(); i++){
+            Part partFromList = allParts.get(i);
+            if (partFromList.equals(part)){
+                partFromList.setCount(part.getCount() + partFromList.getCount());
+                partdao.update(partFromList);
+                dublicate = true;
+            }
+        }
+        if (!dublicate)partdao.save(part);
     }
 
     @Override
@@ -42,4 +52,35 @@ public class PartServiceImpl implements PartService {
     public void delete(int id) {
         partdao.delete(id);
     }
+
+    public int collectComputers(){
+        int countComputers = Integer.MAX_VALUE;
+        for (Part part : partdao.findAll()){
+            if (part.getRequired()==1 && part.getCount() < countComputers) countComputers = part.getCount();
+        }
+        if (countComputers == Integer.MAX_VALUE) countComputers = 0;
+        return countComputers;
+    }
+
+    public int getPagesCount(){
+        List<Part> allParts = partdao.findAll();
+        int count =  allParts.size() / 10;
+        if (allParts.size() % 10 != 0) count++;
+        if (allParts.size() / 10 == 0) count = 1;
+        return count;
+    }
+
+    public int getPagesCount(boolean required){
+        int requiredInt = required ? 1 : 0;
+        List<Part> allParts = partdao.findAll();
+        int size = 0;
+        for (Part part : allParts){
+            if (part.getRequired() == requiredInt) size++;
+        }
+        int count = size / 10;
+        if (size % 10 != 0) count++;
+        if (size / 10 == 0) count = 1;
+        return count;
+    }
+
 }

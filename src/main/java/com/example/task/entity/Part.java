@@ -54,7 +54,7 @@ public class Part {
         if (o == null || getClass() != o.getClass()) return false;
         Part part = (Part) o;
         return required == part.required &&
-                Objects.equals(name, part.name);
+               name.equalsIgnoreCase(part.name);
     }
 
     @Override

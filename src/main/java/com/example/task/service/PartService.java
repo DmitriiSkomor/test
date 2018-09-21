@@ -16,4 +16,8 @@ public interface PartService {
     void update(Part part);
 
     void delete(int id);
+
+    int collectComputers();
+    int getPagesCount();
+    int getPagesCount(boolean required);
 }

@@ -70,7 +70,7 @@
         <tfoot>
         <tr>
             <td colspan="3">
-                You can create: <b>${computers}</b> computers.        Page: <b>${page}</b></div>
+                You can create: <b>${computers}</b> computers.        Page: ${page}/${pagesCount}</div>
 </div>
 </td>
 </tr>

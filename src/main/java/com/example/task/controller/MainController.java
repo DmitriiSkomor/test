@@ -18,6 +18,10 @@ public class MainController {
         return "redirect:/parts";
     }
 
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello";
+    }
 
     @Autowired
     public PartService partService;
@@ -25,37 +29,34 @@ public class MainController {
 
     @GetMapping("/parts")                                                                                                                       //2 - all, 0 - optional, 1 - required
     public String getAllParts(Model model, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "2")int requiredFilter, @RequestParam(required = false) String search){
-    List<Part> parts;
+        List<Part> parts;
+        int pagesCount;
+
         if (page < 1) {page++;}
 
         if (search != null){
             parts = partService.findAll(page,search);
+            pagesCount = 1;
         }
         else {
             if (requiredFilter != 2) {
                 boolean requiredBool;
                 requiredBool = requiredFilter == 1 ? true : false;
-
+                pagesCount = partService.getPagesCount(requiredBool);
+                if (page > pagesCount) page = pagesCount;
                 parts = partService.findAll(page, requiredBool);
-                while (parts.size() == 0 && page > 1) {
-                    parts = partService.findAll(--page, requiredBool);
-                }
 
             } else {
+                pagesCount = partService.getPagesCount();
+                if (page > pagesCount) page = pagesCount;
                 parts = partService.findAll(page);
-                if (parts.size() == 0 && page > 1) parts = partService.findAll(--page);
             }
 
         }
-        int countComputers = Integer.MAX_VALUE;
-        for (Part part : partService.findAll()){
-            if (part.getRequired()==1 && part.getCount() < countComputers) countComputers = part.getCount();
-        }
-        if (countComputers == Integer.MAX_VALUE) countComputers = 0;
-
+        model.addAttribute("pagesCount", pagesCount);
         model.addAttribute("requiredFilter", requiredFilter);
         model.addAttribute("parts", parts);
-        model.addAttribute("computers",countComputers);
+        model.addAttribute("computers",partService.collectComputers());
         model.addAttribute("page", page);
         return "partsList";
     }
@@ -79,17 +80,7 @@ public class MainController {
 
     @PostMapping("addPart")
     public String addPart(@RequestParam int page, @ModelAttribute("part") Part part, @RequestParam(required = false, defaultValue = "2")int requiredFilter){
-        List<Part> allParts = partService.findAll();
-        boolean dublicate = false;
-        for (int i = 0; i < allParts.size(); i++){
-            Part partFromList = allParts.get(i);
-            if (partFromList.equals(part)){
-                partFromList.setCount(part.getCount() + partFromList.getCount());
-                partService.update(partFromList);
-                dublicate = true;
-            }
-        }
-        if (!dublicate) partService.save(part);
+        partService.save(part);
         return "redirect:/parts?page="+page+"&requiredFilter="+requiredFilter;
     }
     @GetMapping("delete/{id}")
