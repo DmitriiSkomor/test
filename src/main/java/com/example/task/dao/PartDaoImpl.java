@@ -1,7 +1,7 @@
-package com.example.demo.dao;
+package com.example.task.dao;
 
-import com.example.demo.entity.Part;
-import com.example.demo.mapper.PartMapper;
+import com.example.task.entity.Part;
+import com.example.task.mapper.PartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 

@@ -1,6 +1,6 @@
-package com.example.demo.mapper;
+package com.example.task.mapper;
 
-import com.example.demo.entity.Part;
+import com.example.task.entity.Part;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

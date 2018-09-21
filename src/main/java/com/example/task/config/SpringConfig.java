@@ -1,16 +1,13 @@
-package com.example.demo.config;
+package com.example.task.config;
 
-import com.example.demo.dao.PartDao;
-import com.example.demo.dao.PartDaoImpl;
+import com.example.task.dao.PartDao;
+import com.example.task.dao.PartDaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.beans.Statement;
-import java.sql.ResultSet;
 
 @Configuration
 public class SpringConfig { // cannot add context

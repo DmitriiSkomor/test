@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.example.task.service;
 
-import com.example.demo.entity.Part;
+import com.example.task.entity.Part;
 
 import java.util.List;
 

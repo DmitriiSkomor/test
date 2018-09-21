@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.task.entity;
 
 import java.util.Objects;
 

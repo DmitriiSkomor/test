@@ -1,13 +1,11 @@
-package com.example.demo.controller;
+package com.example.task.controller;
 
-import com.example.demo.entity.Part;
-import com.example.demo.service.PartService;
-import freemarker.ext.beans.HashAdapter;
+import com.example.task.entity.Part;
+import com.example.task.service.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 

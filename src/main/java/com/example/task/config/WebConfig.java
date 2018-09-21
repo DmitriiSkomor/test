@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.task.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages =  "com.example.demo.controller")
+@ComponentScan(basePackages = "com.example.task.controller")
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver getViewResolver(){

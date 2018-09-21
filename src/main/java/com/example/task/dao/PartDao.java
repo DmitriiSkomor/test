@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.example.task.dao;
 
-import com.example.demo.entity.Part;
+import com.example.task.entity.Part;
 
 import java.util.List;
 
